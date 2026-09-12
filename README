@@ -1,0 +1,72 @@
+# Kaun Banega Arabpati (Modern Port)
+
+A modern reimplementation of **Kaun Banega Arabpati** ("Who Wants To Be A Billionaire?"), a *Who Wants to Be a Millionaire*-style quiz game.
+
+The original was written in **Turbo C++ for DOS in 2000 by Jayant Kumar Gandhi**, using Borland's BGI graphics library, direct VGA memory access, and inline x86 assembly. That original source is preserved unmodified in [`legacy/`](./legacy).
+
+This repository adds two modern, portable implementations of the same game, using the real 15 questions extracted from the original `DATA.DAT` binary question bank:
+
+| Folder | Stack | Description |
+|---|---|---|
+| [`web/`](./web) | HTML / CSS / JavaScript | Browser-playable version. No build step — just open `index.html`. |
+| [`native/`](./native) | C++17 | Portable console version. Compiles with any standard C++ compiler (no DOS/BGI dependencies). |
+| [`legacy/`](./legacy) | Turbo C++ (DOS) | The original, unmodified 2000-era source and assets. |
+| [`data/`](./data) | JSON | The 15 questions, extracted from the original `DATA.DAT`, in a portable format. |
+
+## Running the web version
+
+Just open `web/index.html` in a browser, or serve the folder locally, e.g.:
+
+```bash
+cd web
+python3 -m http.server 8000
+# then open http://localhost:8000
+```
+
+## Building & running the native C++ version
+
+```bash
+cd native
+g++ -std=c++17 -O2 -o kbap kbap.cpp
+./kbap
+```
+
+## Game rules
+
+- **Sign up / Log in** — the web version has individual accounts. Your username, best score, and game history are saved in your browser's local storage (not on a server, not shared across devices).
+- **5 categories** — General Knowledge, Science, History, Entertainment, and **Mixed** (pulls from all categories in one game, like the real KBC show mixing subjects).
+- **~467 total questions** across all categories combined — but every individual game is still just 15 questions, matching the real show's format. The large pool just means more variety across many playthroughs.
+- **Real KBC prize ladder** — ₹1,000 up to ₹1,00,00,000, with guaranteed checkpoints at question 5 and question 10, matching the classic show's actual amounts.
+- **20-second timer per question** — answer before time runs out, or it counts as a wrong answer.
+- **Adaptive difficulty** — answer correctly without a lifeline and the next question gets harder; lean on a lifeline and difficulty holds steady.
+- Each playthrough draws fresh, non-repeating questions, so no two games are exactly the same.
+- Three lifelines, usable once each per game:
+  - **50-50** — removes two incorrect options.
+  - **Ask the Audience** — shows a simulated audience poll.
+  - **Phone a Friend** — a simulated friend suggests an answer (correct ~75% of the time).
+- A wrong answer, or running out of time, ends the game; you keep the last guaranteed checkpoint prize.
+- **My Dashboard** shows your games played, best prize, a progress chart of your last 12 games, and recent game history.
+- **Leaderboard** ranks every local account on this browser by their best prize won.
+
+> Note: this local-storage login system is meant for a single-device demo/portfolio project, not real-world security. Passwords are only lightly obfuscated, not properly encrypted, and nothing is synced across devices or shared with anyone else. For a production app you'd want a real backend with proper password hashing and a database.
+
+## Extra features
+
+- **Sound effects** — synthesized correct/wrong/win tones via the Web Audio API (no audio files needed).
+- **Voice narration** — questions are read aloud using your browser's built-in text-to-speech (toggleable from the home screen).
+- **Confetti animation** — plays on checkpoints and big wins.
+- **Animated feel throughout** — smooth screen transitions, options sliding in, correct/wrong glow and shake effects, a pulsing timer as time runs low, a glowing prize ladder, and satisfying button feedback (respects "reduce motion" accessibility settings).
+- **Virtual host commentary** — short reaction lines after each answer, like a real quiz show host.
+- **Hindi / English / Urdu language toggle** — switches all interface text (buttons, labels, menus). Quiz *questions* stay in English in every language — translating hundreds of trivia questions accurately was out of scope, and mistranslated trivia would do more harm than good.
+- **Installable PWA** — the web version can be installed like a native app and works offline, *if served over http(s)* (see note below).
+
+> **Important:** the offline/installable features (service worker, "Install App" button) only work when the `web` folder is served over `http://` or `https://` — for example with `python3 -m http.server` — not when you just double-click `index.html` directly (the `file://` protocol doesn't support service workers). Opening `index.html` directly still works fine for playing the game; you just won't get offline support or the install prompt that way.
+
+## Credits
+
+- **Original game & questions**: Jayant Kumar Gandhi (2000) — [www.jayantgandhi.com](http://www.jayantgandhi.com)
+- **Modern port**: rebuilt from the original source and extracted data for cross-platform, VS Code–friendly development.
+
+## License
+
+The original author's readme notes that certain copyrights are retained. Attribution to Jayant Kumar Gandhi is preserved throughout this repository. See [`legacy/readme.txt`](./legacy/readme.txt) and [`legacy/ReadMe1.txt`](./legacy/ReadMe1.txt) for the original terms.

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaun Banega Arabpati</title>
+<meta name="theme-color" content="#0a0f2c">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- LANGUAGE SELECTOR (always visible, top corner) -->
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="hi">हिं</button>
+      <button class="lang-btn" data-lang="ur">اردو</button>
+    </div>
+
+    <!-- AUTH SCREEN -->
+    <section id="auth-screen" class="screen active">
+      <h1 class="title">KAUN <span>BANEGA</span> ARAB-PATI</h1>
+      <p class="subtitle" data-i18n="subtitle">Who Wants To Be A Billionaire?</p>
+      <p class="welcome-tagline" id="welcome-tagline"><span class="tagline-coin" aria-hidden="true">₹</span><span id="welcome-tagline-text"></span><span class="tagline-cursor">|</span></p>
+      <p class="fun-fact" id="fun-fact"></p>
+
+      <div class="auth-box">
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tab-login" data-tab="login" data-i18n="tabLogin">Log In</button>
+          <button class="auth-tab" id="tab-register" data-tab="register" data-i18n="tabRegister">Register</button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <label for="login-username" data-i18n="username">Username</label>
+          <input type="text" id="login-username" autocomplete="username" required>
+          <label for="login-password" data-i18n="password">Password</label>
+          <input type="password" id="login-password" autocomplete="current-password" required>
+          <p class="auth-error" id="login-error"></p>
+          <button type="submit" class="primary-btn" data-i18n="logIn">Log In</button>
+        </form>
+
+        <form id="register-form" class="auth-form hidden">
+          <label for="register-username" data-i18n="chooseUsername">Choose a Username</label>
+          <input type="text" id="register-username" autocomplete="username" required>
+          <label for="register-password" data-i18n="choosePassword">Choose a Password</label>
+          <input type="password" id="register-password" autocomplete="new-password" required>
+          <label for="register-password-confirm" data-i18n="confirmPassword">Confirm Password</label>
+          <input type="password" id="register-password-confirm" autocomplete="new-password" required>
+          <p class="auth-error" id="register-error"></p>
+          <button type="submit" class="primary-btn" data-i18n="createAccount">Create Account</button>
+        </form>
+
+        <p class="auth-note" data-i18n="authNote">Accounts are saved on this browser only.</p>
+      </div>
+    </section>
+
+    <!-- HOME SCREEN -->
+    <section id="home-screen" class="screen">
+      <h1 class="title small">KAUN <span>BANEGA</span> ARAB-PATI</h1>
+      <p class="welcome-text" data-i18n="welcomeBack">Welcome back, <span id="home-username"></span>!</p>
+      <div class="home-actions">
+        <button id="go-play-btn" class="primary-btn" data-i18n="playGame">Play Game</button>
+        <button id="go-leaderboard-btn" class="secondary-btn" data-i18n="leaderboard">Leaderboard</button>
+        <button id="go-dashboard-btn" class="secondary-btn" data-i18n="myDashboard">My Dashboard</button>
+        <label class="voice-toggle">
+          <input type="checkbox" id="voice-toggle-checkbox" checked>
+          <span data-i18n="voiceNarration">Voice narration</span>
+        </label>
+        <button id="install-app-btn" class="text-btn hidden" data-i18n="installApp">Install App</button>
+        <button id="logout-btn" class="text-btn" data-i18n="logOut">Log Out</button>
+      </div>
+    </section>
+
+    <!-- CATEGORY SCREEN -->
+    <section id="category-screen" class="screen">
+      <h2 class="section-title" data-i18n="chooseCategory">Choose a Category</h2>
+      <div id="category-grid" class="category-grid"></div>
+      <button id="category-back-btn" class="text-btn" data-i18n="back">&larr; Back</button>
+    </section>
+
+    <!-- GAME SCREEN -->
+    <section id="game-screen" class="screen">
+      <div class="game-layout">
+
+        <div class="main-panel">
+          <div class="hud">
+            <div class="hud-item"><span data-i18n="questionLabel">Question</span> <span id="q-index">1</span> / <span id="q-total">15</span></div>
+            <div class="hud-item"><span data-i18n="prizeLabel">Prize:</span> <span id="q-prize">2,500</span></div>
+            <div class="hud-item timer-item"><span data-i18n="timeLabel">Time:</span> <span id="q-timer">20</span>s</div>
+          </div>
+
+          <div class="timer-bar-track"><div class="timer-bar-fill" id="timer-bar-fill"></div></div>
+
+          <div class="question-box">
+            <p id="question-text" data-i18n="loadingQuestion">Loading question...</p>
+          </div>
+
+          <div class="options-grid" id="options-grid">
+            <!-- options injected by JS -->
+          </div>
+
+          <div class="lifelines">
+            <button class="lifeline-btn" id="lifeline-5050" data-lifeline="fiftyFifty">50-50</button>
+            <button class="lifeline-btn" id="lifeline-poll" data-lifeline="askAudience" data-i18n="askAudience">Ask Audience</button>
+            <button class="lifeline-btn" id="lifeline-phone" data-lifeline="phoneFriend" data-i18n="phoneFriend">Phone a Friend</button>
+            <button class="quit-btn" id="quit-btn" data-i18n="quitWalkAway">Quit &amp; Walk Away</button>
+          </div>
+
+          <div id="lifeline-output" class="lifeline-output"></div>
+          <div id="host-commentary" class="host-commentary"></div>
+        </div>
+
+        <aside class="ladder-panel">
+          <h2 data-i18n="prizeLadder">Prize Ladder</h2>
+          <ol id="ladder-list" class="ladder-list" reversed></ol>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- RESULT SCREEN -->
+    <section id="result-screen" class="screen">
+      <h1 id="result-title">Game Over</h1>
+      <p id="result-message"></p>
+      <div class="result-actions">
+        <button id="play-again-btn" class="primary-btn" data-i18n="playAgain">Play Again</button>
+        <button id="result-home-btn" class="secondary-btn" data-i18n="home">Home</button>
+      </div>
+    </section>
+
+    <!-- LEADERBOARD SCREEN -->
+    <section id="leaderboard-screen" class="screen">
+      <h2 class="section-title" data-i18n="leaderboard">Leaderboard</h2>
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th data-i18n="rank">Rank</th>
+            <th data-i18n="player">Player</th>
+            <th data-i18n="bestPrize">Best Prize</th>
+            <th data-i18n="gamesPlayed">Games Played</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-body"></tbody>
+      </table>
+      <p id="leaderboard-empty" class="empty-note hidden" data-i18n="noGamesYet">No games played yet. Be the first!</p>
+      <button id="leaderboard-back-btn" class="text-btn" data-i18n="back">&larr; Back</button>
+    </section>
+
+    <!-- DASHBOARD SCREEN -->
+    <section id="dashboard-screen" class="screen">
+      <h2 class="section-title" data-i18n="myDashboard">My Dashboard</h2>
+      <div id="dashboard-stats" class="dashboard-stats"></div>
+      <h3 class="subsection-title" data-i18n="progressChart">Progress Over Recent Games</h3>
+      <canvas id="dashboard-chart" class="dashboard-chart" width="600" height="200"></canvas>
+      <h3 class="subsection-title" data-i18n="recentGames">Recent Games</h3>
+      <ul id="dashboard-history" class="dashboard-history"></ul>
+      <p id="dashboard-empty" class="empty-note hidden" data-i18n="noGamesPlayedYou">You haven't played any games yet.</p>
+      <button id="dashboard-back-btn" class="text-btn" data-i18n="back">&larr; Back</button>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
