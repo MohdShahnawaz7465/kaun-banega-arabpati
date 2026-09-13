@@ -382,6 +382,8 @@ button:focus-visible {
 
 .hud {
   display: flex;
+  flex-wrap: wrap;
+  row-gap: 6px;
   justify-content: space-between;
   font-size: 0.95rem;
   color: var(--text-dim);
@@ -1213,4 +1215,64 @@ html[dir="rtl"] .hud {
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
+}
+
+/* ---------- SMALL PHONE FIXES (narrow screens like standard mobile widths) ---------- */
+@media (max-width: 480px) {
+  .app {
+    padding: 12px;
+  }
+
+  .main-panel {
+    padding: 16px;
+  }
+
+  .hud {
+    font-size: 0.8rem;
+    gap: 4px;
+  }
+
+  #question-text {
+    font-size: 1.1rem;
+  }
+
+  .options-grid {
+    gap: 10px;
+  }
+
+  .option-btn {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  .lifelines {
+    justify-content: center;
+  }
+
+  .quit-btn {
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+    order: 10;
+  }
+
+  .title {
+    font-size: clamp(1.6rem, 8vw, 2.4rem);
+  }
+
+  .welcome-tagline {
+    font-size: 1.1rem;
+  }
+
+  .auth-box {
+    padding: 18px;
+  }
+
+  .category-grid {
+    max-width: 100%;
+  }
+
+  .dashboard-chart {
+    height: 160px;
+  }
 }
