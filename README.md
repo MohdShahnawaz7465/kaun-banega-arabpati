@@ -1,6 +1,18 @@
 # Kaun Banega Arabpati 🎮
 
+**🔗 [Play it live here](https://mohdshahnawaz7465.github.io/kaun-banega-arabpati/)** — no download, no signup required to try it, works right in your browser.
+
 Remember those old DOS-based quiz games from back in the day? I found one from 2000 — "Kaun Banega Arabpati," basically a *Who Wants to Be a Millionaire?*-style game — sitting around in Turbo C++, using ancient graphics libraries that don't even run on modern computers anymore. Instead of letting it rot, I decided to rebuild it from scratch with a modern stack, and honestly it turned into a much bigger project than I expected.
+
+## Screenshots
+
+| Login | Home |
+|---|---|
+| ![Login screen](./screenshots/01-login.jpg) | ![Home screen](./screenshots/02-home.jpg) |
+
+| Categories | Gameplay |
+|---|---|
+| ![Category selection](./screenshots/03-categories.jpg) | ![Gameplay with prize ladder](./screenshots/04-gameplay.jpg) |
 
 This repo has three things in it:
 
@@ -23,6 +35,10 @@ This repo has three things in it:
 - **Installable as an app** (PWA) if you serve it through a local server instead of just opening the file directly — works offline once installed.
 
 ## Running it
+
+Easiest option: just use the **[live demo link](https://mohdshahnawaz7465.github.io/kaun-banega-arabpati/)** above — nothing to install.
+
+If you'd rather run it yourself locally:
 
 **Web version** — just open `web/index.html` in a browser. That's it, no setup.
 
