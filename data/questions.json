@@ -1,0 +1,92 @@
+[
+  {
+    "question": "Who directed the movie 'Jurassic Park'?",
+    "options": ["John Williams", "Hans Solo", "Steven Spielberg", "John Woo"],
+    "correct": 2,
+    "prize": "2,500"
+  },
+  {
+    "question": "Queensland, Victoria are in ...",
+    "options": ["Wales", "Ireland", "Australia", "Germany"],
+    "correct": 2,
+    "prize": "5,000"
+  },
+  {
+    "question": "Earthquakes are measured in ___ scale?",
+    "options": ["Vibration", "Red", "Shake", "Richter"],
+    "correct": 3,
+    "prize": "10,000"
+  },
+  {
+    "question": "What is lycanthrope?",
+    "options": ["A chemical", "A disease", "A werewolf", "Plastic"],
+    "correct": 2,
+    "prize": "20,000"
+  },
+  {
+    "question": "Eastern most state in USA?",
+    "options": ["Alaska", "Nova Scotia", "New York", "Maine"],
+    "correct": 0,
+    "prize": "40,000"
+  },
+  {
+    "question": "A 'herbivore' is an animal that eats:",
+    "options": ["at McDonald's", "only Meat", "Meat and Plants", "only Plants"],
+    "correct": 3,
+    "prize": "80,000"
+  },
+  {
+    "question": "Human beings are:",
+    "options": ["Carnivores", "Omnivores", "Herbivores", "3D Special Effects"],
+    "correct": 1,
+    "prize": "1,60,000"
+  },
+  {
+    "question": "Study of Sound?",
+    "options": ["Acoustics", "Biology", "Morphology", "Soundology"],
+    "correct": 0,
+    "prize": "3,20,000"
+  },
+  {
+    "question": "Common name for 'Bellis perennis':",
+    "options": ["Lily", "Daisy", "Rosy", "Rose"],
+    "correct": 1,
+    "prize": "6,25,000"
+  },
+  {
+    "question": "What is NaCl?",
+    "options": ["Rock Salt", "Common Salt", "Zeise Salt", "National Clay"],
+    "correct": 1,
+    "prize": "12,50,000"
+  },
+  {
+    "question": "Southern most tip of India?",
+    "options": ["Indra Point", "Kashmir", "Kanyakumari", "Mumbai"],
+    "correct": 0,
+    "prize": "25,00,000"
+  },
+  {
+    "question": "Which is the oldest game in the world?",
+    "options": ["Cricket", "Football", "Hockey", "Polo"],
+    "correct": 3,
+    "prize": "50,00,000"
+  },
+  {
+    "question": "Which country has the largest railway network?",
+    "options": ["USA", "India", "Australia", "Japan"],
+    "correct": 1,
+    "prize": "1,00,00,000"
+  },
+  {
+    "question": "The only animal having 4 knees is ...",
+    "options": ["Monkey", "Giraffe", "Elephant", "Dog"],
+    "correct": 2,
+    "prize": "10,00,00,000"
+  },
+  {
+    "question": "Who wrote 'Time Machine'?",
+    "options": ["H. G. Wells", "Amrita Pritam", "Shakespeare", "John Hunt"],
+    "correct": 0,
+    "prize": "1,00,00,00,000"
+  }
+]

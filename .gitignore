@@ -1,0 +1,12 @@
+# Build artifacts
+native/kbap
+native/*.o
+native/*.exe
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/extensions.json

@@ -1,72 +1,49 @@
-# Kaun Banega Arabpati (Modern Port)
+# Kaun Banega Arabpati 🎮
 
-A modern reimplementation of **Kaun Banega Arabpati** ("Who Wants To Be A Billionaire?"), a *Who Wants to Be a Millionaire*-style quiz game.
+Remember those old DOS-based quiz games from back in the day? I found one from 2000 — "Kaun Banega Arabpati," basically a *Who Wants to Be a Millionaire?*-style game — sitting around in Turbo C++, using ancient graphics libraries that don't even run on modern computers anymore. Instead of letting it rot, I decided to rebuild it from scratch with a modern stack, and honestly it turned into a much bigger project than I expected.
 
-The original was written in **Turbo C++ for DOS in 2000 by Jayant Kumar Gandhi**, using Borland's BGI graphics library, direct VGA memory access, and inline x86 assembly. That original source is preserved unmodified in [`legacy/`](./legacy).
+This repo has three things in it:
 
-This repository adds two modern, portable implementations of the same game, using the real 15 questions extracted from the original `DATA.DAT` binary question bank:
+- **`web/`** — the main version. A full browser-based quiz game with accounts, categories, a real KBC-style prize ladder, sound effects, voice narration, animations, the whole deal.
+- **`native/`** — a portable C++17 console version of the same game, for anyone who wants to run it in a terminal without a browser.
+- **`legacy/`** — the original 2000-era DOS source code, untouched, just kept here for history's sake.
 
-| Folder | Stack | Description |
-|---|---|---|
-| [`web/`](./web) | HTML / CSS / JavaScript | Browser-playable version. No build step — just open `index.html`. |
-| [`native/`](./native) | C++17 | Portable console version. Compiles with any standard C++ compiler (no DOS/BGI dependencies). |
-| [`legacy/`](./legacy) | Turbo C++ (DOS) | The original, unmodified 2000-era source and assets. |
-| [`data/`](./data) | JSON | The 15 questions, extracted from the original `DATA.DAT`, in a portable format. |
+## What's actually in the web version
 
-## Running the web version
+- **Real accounts** — register, log in, log out. (Heads up: accounts are saved in your browser's local storage, not on a real server, so they won't follow you to a different device. That's a known trade-off for a project like this — no backend, no cost, works instantly.)
+- **5 categories** to pick from — General Knowledge, Science, History, Entertainment, and a "Mixed" mode that shuffles questions from all of them together, just like the real show does.
+- **~467 questions** in the pool, but every single game is still just 15 questions — the big pool just means you're less likely to see the same set twice.
+- **The actual KBC prize ladder** — ₹1,000 up to ₹1,00,00,000, with the real checkpoint amounts at question 5 and question 10.
+- **A 20-second timer** per question, because urgency makes trivia more fun.
+- **Adaptive difficulty** — get a few right in a row without help, and it starts throwing harder stuff at you.
+- **The three classic lifelines** — 50-50, Ask the Audience, and Phone a Friend (with a proper suspenseful pause before the friend answers, not an instant reply).
+- **A dashboard and leaderboard** so you can track your best runs and see how you stack up against anyone else who's played on your browser.
+- **Sound, voice narration, confetti, and a virtual host** who reacts to your answers — small touches, but they make it feel alive.
+- **Hindi, English, and Urdu** support for all the menus and buttons. (The actual quiz questions stay in English everywhere — translating hundreds of trivia questions accurately is its own project, and I'd rather ship it correctly in one language than sloppily in three.)
+- **Installable as an app** (PWA) if you serve it through a local server instead of just opening the file directly — works offline once installed.
 
-Just open `web/index.html` in a browser, or serve the folder locally, e.g.:
+## Running it
 
+**Web version** — just open `web/index.html` in a browser. That's it, no setup.
+
+If you want the installable/offline features to actually work, you need to serve it properly instead of double-clicking the file:
 ```bash
 cd web
 python3 -m http.server 8000
-# then open http://localhost:8000
+# then visit http://localhost:8000
 ```
 
-## Building & running the native C++ version
-
+**Native C++ version** — needs a C++17 compiler:
 ```bash
 cd native
 g++ -std=c++17 -O2 -o kbap kbap.cpp
 ./kbap
 ```
 
-## Game rules
+## A quick honest note
 
-- **Sign up / Log in** — the web version has individual accounts. Your username, best score, and game history are saved in your browser's local storage (not on a server, not shared across devices).
-- **5 categories** — General Knowledge, Science, History, Entertainment, and **Mixed** (pulls from all categories in one game, like the real KBC show mixing subjects).
-- **~467 total questions** across all categories combined — but every individual game is still just 15 questions, matching the real show's format. The large pool just means more variety across many playthroughs.
-- **Real KBC prize ladder** — ₹1,000 up to ₹1,00,00,000, with guaranteed checkpoints at question 5 and question 10, matching the classic show's actual amounts.
-- **20-second timer per question** — answer before time runs out, or it counts as a wrong answer.
-- **Adaptive difficulty** — answer correctly without a lifeline and the next question gets harder; lean on a lifeline and difficulty holds steady.
-- Each playthrough draws fresh, non-repeating questions, so no two games are exactly the same.
-- Three lifelines, usable once each per game:
-  - **50-50** — removes two incorrect options.
-  - **Ask the Audience** — shows a simulated audience poll.
-  - **Phone a Friend** — a simulated friend suggests an answer (correct ~75% of the time).
-- A wrong answer, or running out of time, ends the game; you keep the last guaranteed checkpoint prize.
-- **My Dashboard** shows your games played, best prize, a progress chart of your last 12 games, and recent game history.
-- **Leaderboard** ranks every local account on this browser by their best prize won.
+The account system in this project is intentionally simple — everything lives in browser storage, and passwords are only lightly obfuscated, not properly hashed the way a real production app would do it. This was a deliberate choice to keep the project running without needing a server, a database, or any ongoing cost. If I ever turn this into something more serious, a real backend is the obvious next step.
 
-> Note: this local-storage login system is meant for a single-device demo/portfolio project, not real-world security. Passwords are only lightly obfuscated, not properly encrypted, and nothing is synced across devices or shared with anyone else. For a production app you'd want a real backend with proper password hashing and a database.
+## Credit where it's due
 
-## Extra features
-
-- **Sound effects** — synthesized correct/wrong/win tones via the Web Audio API (no audio files needed).
-- **Voice narration** — questions are read aloud using your browser's built-in text-to-speech (toggleable from the home screen).
-- **Confetti animation** — plays on checkpoints and big wins.
-- **Animated feel throughout** — smooth screen transitions, options sliding in, correct/wrong glow and shake effects, a pulsing timer as time runs low, a glowing prize ladder, and satisfying button feedback (respects "reduce motion" accessibility settings).
-- **Virtual host commentary** — short reaction lines after each answer, like a real quiz show host.
-- **Hindi / English / Urdu language toggle** — switches all interface text (buttons, labels, menus). Quiz *questions* stay in English in every language — translating hundreds of trivia questions accurately was out of scope, and mistranslated trivia would do more harm than good.
-- **Installable PWA** — the web version can be installed like a native app and works offline, *if served over http(s)* (see note below).
-
-> **Important:** the offline/installable features (service worker, "Install App" button) only work when the `web` folder is served over `http://` or `https://` — for example with `python3 -m http.server` — not when you just double-click `index.html` directly (the `file://` protocol doesn't support service workers). Opening `index.html` directly still works fine for playing the game; you just won't get offline support or the install prompt that way.
-
-## Credits
-
-- **Original game & questions**: Jayant Kumar Gandhi (2000) — [www.jayantgandhi.com](http://www.jayantgandhi.com)
-- **Modern port**: rebuilt from the original source and extracted data for cross-platform, VS Code–friendly development.
-
-## License
-
-The original author's readme notes that certain copyrights are retained. Attribution to Jayant Kumar Gandhi is preserved throughout this repository. See [`legacy/readme.txt`](./legacy/readme.txt) and [`legacy/ReadMe1.txt`](./legacy/ReadMe1.txt) for the original terms.
+The original 2000 DOS game and its questions were made by **Jayant Kumar Gandhi**. That source is preserved as-is in [`legacy/`](./legacy). Everything else in this repo — the modern rewrite, the new features, the ~467 new trivia questions, the design — is my own work, built from the ground up.
