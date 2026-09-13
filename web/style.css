@@ -190,7 +190,7 @@ body::after {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: var(--gold-bright);
-  animation: title-shimmer 4s linear infinite, title-entrance 0.6s ease backwards, title-glow-pulse 2.4s ease-in-out infinite;
+  animation: title-shimmer 4s linear infinite, title-entrance 0.6s ease both, title-glow-pulse 2.4s ease-in-out infinite;
 }
 
 @keyframes title-shimmer {
@@ -198,9 +198,9 @@ body::after {
 }
 
 @keyframes title-entrance {
-  0% { opacity: 0; transform: translateY(-20px) scale(0.8) rotateX(-20deg); filter: blur(6px); }
-  60% { opacity: 1; transform: translateY(2px) scale(1.05) rotateX(0deg); filter: blur(0); }
-  100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); }
+  0% { opacity: 0; transform: translateY(-20px) scale(0.85); }
+  60% { opacity: 1; transform: translateY(2px) scale(1.05); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @keyframes title-glow-pulse {
@@ -451,13 +451,13 @@ button:focus-visible {
 }
 
 #question-text.reveal {
-  animation: question-reveal 0.5s cubic-bezier(0.2, 0.8, 0.3, 1.2);
+  animation: question-reveal 0.5s cubic-bezier(0.2, 0.8, 0.3, 1.2) forwards;
 }
 
 @keyframes question-reveal {
-  0% { opacity: 0; transform: scale(0.85) rotateX(-15deg); filter: blur(4px); }
-  60% { opacity: 1; transform: scale(1.03) rotateX(0deg); filter: blur(0); }
-  100% { opacity: 1; transform: scale(1) rotateX(0deg); }
+  0% { opacity: 0; transform: scale(0.9) translateY(10px); }
+  60% { opacity: 1; transform: scale(1.02) translateY(0); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
